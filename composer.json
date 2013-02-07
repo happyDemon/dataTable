@@ -1,0 +1,20 @@
+{
+	"name"       :"happyDemon/notePad",
+	"type"       :"kohana-module",
+	"description":"Data UI inspired by django",
+	"keywords"   :["kohana", "data", "generator", "ORM"],
+	"homepage"   :"https://github.com/happyDemon",
+	"license"    :"MIT",
+	"authors"    :[
+		{
+			"name"    :"Maxim Kerstens",
+			"email"   :"admin@happydemon.org",
+			"homepage":"http://happydemon.org",
+			"role"    :"Developer"
+		}
+	],
+	"require"    :{
+		"php"                :">=5.3.3",
+		"composer/installers":"*"
+	}
+}
