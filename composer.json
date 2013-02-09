@@ -21,9 +21,9 @@
                 "version"	: "master",
                 "source"	: {
                     "url"	: "git://github.com/morgan/kohana-paginate.git",
-                    "type"	: "git",
-            	},
-        	},
+                    "type"	: "git"
+            	}
+        	}
 		},
 		{
 			"type": "package",
@@ -32,9 +32,9 @@
                 "version": "master",
                 "source": {
                     "url": "git://github.com/morgan/kohana-datatables.git",
-                    "type": "git",
-            	},
-        	},
+                    "type": "git"
+            	}
+        	}
 		},
 		{
 			"type": "package",
@@ -43,9 +43,9 @@
                 "version": "master",
                 "source": {
                     "url": "git://github.com/openbuildings/asset-merger.git",
-                    "type": "git",
+                    "type": "git"
             	},
-        	},
+        	}
 		}
 	],
 	"require"    :{
