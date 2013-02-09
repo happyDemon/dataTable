@@ -1,32 +1,58 @@
 {
-	"name"       :"happydemon/data-table",
-	"type"       :"kohana-module",
-	"description":"Kohana wrapper for generating standardised jQuery DataTables",
-	"keywords"   :["kohana", "data", "generator", "ORM", "dataTable", "jQuery", "UI"],
-	"homepage"   :"https://github.com/happyDemon/dataTable",
-	"license"    :"MIT",
-	"authors"    :[
+	"name"       : "happydemon/data-table",
+	"type"       : "kohana-module",
+	"description": "Kohana wrapper for generating standardised jQuery DataTables",
+	"keywords"   : ["kohana", "data", "generator", "ORM", "dataTable", "jQuery", "UI"],
+	"homepage"   : "https://github.com/happyDemon/dataTable",
+	"license"    : "MIT",
+	"authors"    : [
 		{
-			"name"    :"Maxim Kerstens",
-			"email"   :"admin@happydemon.org",
-			"homepage":"http://happydemon.org",
-			"role"    :"Developer"
+			"name"    : "Maxim Kerstens",
+			"email"   : "admin@happydemon.org",
+			"homepage": "http://happydemon.org",
+			"role"    : "Developer"
 		}
 	],
 	"repositories" : [
 		{
-			"type": "vcs",
-			"url": "https://github.com/morgan/kohana-paginate"
+			"type"		: "package",
+            "package"	: {
+                "name"		: "morgan/kohana-paginate",
+                "version"	: "master",
+                "source"	: {
+                    "url"	: "git://github.com/morgan/kohana-paginate.git",
+                    "type"	: "git",
+            	},
+        	},
 		},
 		{
-			"type": "vcs",
-			"url": "https://github.com/morgan/kohana-datatables"
+			"type": "package",
+            "package": {
+                "name": "morgan/kohana-datatables",
+                "version": "master",
+                "source": {
+                    "url": "git://github.com/morgan/kohana-datatables.git",
+                    "type": "git",
+            	},
+        	},
+		},
+		{
+			"type": "package",
+            "package": {
+                "name": "openbuildings/asset-merger",
+                "version": "master",
+                "source": {
+                    "url": "git://github.com/openbuildings/asset-merger.git",
+                    "type": "git",
+            	},
+        	},
 		}
 	],
 	"require"    :{
 		"php":">=5.4",
 		"composer/installers":"*",
 		"morgan/kohana-paginate":"master",
-		"morgan/kohana-datatables":"master"
+		"morgan/kohana-datatables":"master",
+		"openbuildings/asset-merger": 'master"
 	}
 }
