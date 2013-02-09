@@ -53,6 +53,6 @@
 		"composer/installers":"*",
 		"morgan/kohana-paginate":"master",
 		"morgan/kohana-datatables":"master",
-		"openbuildings/asset-merger": 'master"
+		"openbuildings/asset-merger": "master"
 	}
 }
