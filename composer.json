@@ -24,8 +24,9 @@
 		}
 	],
 	"require"    :{
-		"php"                :">=5.4",
+		"php":">=5.4",
 		"composer/installers":"*",
-		"
+		"morgan/kohana-paginate":"master",
+		"morgan/kohana-datatables":"master"
 	}
 }
