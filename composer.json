@@ -1,9 +1,9 @@
 {
-	"name"       :"happyDemon/notePad",
+	"name"       :"happyDemon/dataTable",
 	"type"       :"kohana-module",
-	"description":"Data UI inspired by django",
-	"keywords"   :["kohana", "data", "generator", "ORM"],
-	"homepage"   :"https://github.com/happyDemon",
+	"description":"Kohana wrapper for generating standardised jQuery DataTables",
+	"keywords"   :["kohana", "data", "generator", "ORM", "dataTable", "jQuery"],
+	"homepage"   :"https://github.com/happyDemon/dataTable",
 	"license"    :"MIT",
 	"authors"    :[
 		{
