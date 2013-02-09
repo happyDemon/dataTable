@@ -44,7 +44,7 @@
                 "source": {
                     "url": "git://github.com/openbuildings/asset-merger.git",
                     "type": "git"
-            	},
+            	}
         	}
 		}
 	],
