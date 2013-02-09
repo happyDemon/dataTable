@@ -1,5 +1,5 @@
 {
-	"name"       :"happyDemon/dataTable",
+	"name"       :"happydemon/data-table",
 	"type"       :"kohana-module",
 	"description":"Kohana wrapper for generating standardised jQuery DataTables",
 	"keywords"   :["kohana", "data", "generator", "ORM", "dataTable", "jQuery", "UI"],
@@ -13,8 +13,19 @@
 			"role"    :"Developer"
 		}
 	],
+	"repositories" : [
+		{
+			"type": "vcs",
+			"url": "https://github.com/morgan/kohana-paginate"
+		},
+		{
+			"type": "vcs",
+			"url": "https://github.com/morgan/kohana-datatables"
+		}
+	],
 	"require"    :{
 		"php"                :">=5.4",
-		"composer/installers":"*"
+		"composer/installers":"*",
+		"
 	}
 }
