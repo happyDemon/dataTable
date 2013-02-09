@@ -2,7 +2,7 @@
 	"name"       :"happyDemon/dataTable",
 	"type"       :"kohana-module",
 	"description":"Kohana wrapper for generating standardised jQuery DataTables",
-	"keywords"   :["kohana", "data", "generator", "ORM", "dataTable", "jQuery"],
+	"keywords"   :["kohana", "data", "generator", "ORM", "dataTable", "jQuery", "UI"],
 	"homepage"   :"https://github.com/happyDemon/dataTable",
 	"license"    :"MIT",
 	"authors"    :[
