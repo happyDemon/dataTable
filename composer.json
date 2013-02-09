@@ -19,7 +19,7 @@
             "package"	: {
                 "name"		: "morgan/kohana-paginate",
                 "type"       : "kohana-module",
-                "version"	: "3.3/master",
+                "version"	: "0.3.0",
                 "source"	: {
                     "url"	: "git://github.com/morgan/kohana-paginate.git",
                     "type"	: "git"
@@ -31,7 +31,7 @@
             "package": {
                 "name": "morgan/kohana-datatables",
                 "type": "kohana-module",
-                "version": "3.3/master",
+                "version": "0.2.0",
                 "source": {
                     "url": "git://github.com/morgan/kohana-datatables.git",
                     "type": "git"
