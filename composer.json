@@ -54,8 +54,8 @@
 	"require"    :{
 		"php":">=5.4",
 		"composer/installers":"*",
-		"morgan/kohana-paginate":"3.3/master",
-		"morgan/kohana-datatables":"3.3/master",
+		"morgan/kohana-paginate":"0.3.0",
+		"morgan/kohana-datatables":"0.2.0",
 		"openbuildings/asset-merger":"master"
 	}
 }
