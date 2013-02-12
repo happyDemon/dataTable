@@ -11,15 +11,16 @@ class NotePad_Table_Formats {
 	/**
 	 * parses column value into an image.
 	 * 
-	 * You can optionally assign width and height as param array(w,h).
+	 * You can optionally assign width and height as param array(w,h)
+	 * or even add a class (w,h,c) || (false,false,c)
 	 * 
-	 * @param mixed $param
+	 * @param array $param
 	 * @return string
 	 */
 	public static function image($param=null) {
 		if(is_array($param))
 		{
-			 return 'return: \'<img src="\'+data+\'" width="'.$param[0].'" heigth="'.$param[1].'" />\';';
+			 return self::_view('image', $param);
 		}
 		
 		return 'return: \'<img src="\'+data+\'" />\';';
@@ -31,11 +32,24 @@ class NotePad_Table_Formats {
 	 * @return string
 	 */
 	public static function icon($param=null) {
-		return "
-			if(data == 1)
-				return '<i class=\"icon-{$param[0]}\"></i>';
-			else
-				return '<i class=\"icon-{$param[1]}\"></i>';";
+		return self::_view('icon', $param);
+	}
+	
+	/**
+	 * Parses a column value into a checkbox
+	 * 
+	 * Param is used to name the checkbox element and is gets the class record-{param}
+	 * 
+	 * @param mixed $param input name and class-suffix
+	 * @return string
+	 */
+	public static function checkbox($param=null) {
+		if($param == null)
+		{
+			return "return '<input type=\"checkbox\" name=\"record_id['+data+']\" class=\"record-select\" />";
+		}
+		
+		return self::_view('checkbox', $param);
 	}
 	
 	/**
@@ -54,5 +68,15 @@ class NotePad_Table_Formats {
 		}
 		
 		return $return."';";
+	}
+	
+	/**
+	 * Render the format's v
+	 * 
+	 * @param string $file
+	 * @param array $param
+	 */
+	protected static function _view($file, $param) {
+		return View::factory('notePad/formats/'.file, array('param' => $param))->render();
 	}
 }

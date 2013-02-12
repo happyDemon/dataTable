@@ -16,8 +16,7 @@
 	"require"    :{
 		"php":">=5.4",
 		"composer/installers":"*",
-                    "happydemon/paginate": "dev-master",
-                    "happydemon/datatables": "dev-master",
-                    "happydemon/asset-merger": "dev-master"
+		"morgan/kohana-paginate":"0.3.0",
+		"morgan/kohana-datatables":""0.2.0"
 	}
 }
