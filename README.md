@@ -8,6 +8,8 @@ Install
 
 ### Git
 ```bash
+git clone git://github.com/morgan/kohana-paginate.git modules/paginate
+git clone git://github.com/morgan/kohana-datatables.git modules/datatables
 git clone git://github.com/happyDemon/dataTable.git modules/dataTable
 ```
 
