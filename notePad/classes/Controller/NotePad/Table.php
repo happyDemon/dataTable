@@ -12,6 +12,7 @@ abstract class Controller_NotePad_Table extends Controller {
 	 * @var Table
 	 */
 	public $table = null;
+	protected $_model = null;
 	
 	public function before() {
 		parent::before();
@@ -48,7 +49,8 @@ abstract class Controller_NotePad_Table extends Controller {
 		if (DataTables::is_request())
 		{
 			$data = $this->table->request();
-			$data->render($this->response);
+			//set a model and render
+			$data->model($this->_model)->render($this->response);
 		}
 		else
 			throw new HTTP_Exception_500();
