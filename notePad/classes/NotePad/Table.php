@@ -354,7 +354,7 @@ class NotePad_Table
 	 * 
 	 * @param string $url Base url to send a standardised request to retrieve data records from
 	 */
-	public function json($url) {
+	public function js($url) {
 		$cache = Cache::instance();
 		
 		if (!$view = $cache->get('happyDemon.table.'.$this->_name.'.json', FALSE))

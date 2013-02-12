@@ -30,15 +30,18 @@ abstract class Controller_NotePad_Table extends Controller {
 	abstract protected function _setup_table($table);
 	
 	/**
+	 * Render the provided table
+	 */
+	public function action_table() {
+		//asset file would be {base_url}/NotePad/Table/js
+		$this->response->body($this->table->template());
+	}
+	/**
 	 * Create a javascript that stores the dataTable setup json
 	 */
-	public function action_js(){
-	
-		$pos = strrpos($this->request->uri(), '/');
-		$var_name = ucfirst(substr($this->request->uri(), $pos));
-		
+	public function action_js(){		
 		$this->response->headers('Content-Type','application/x-javascript');
-		$this->response->body($this->table->json());
+		$this->response->body($this->table->js());
 	}
 	
 	/**

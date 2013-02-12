@@ -1,7 +1,14 @@
 dataTable
 =========
 
-Kohana 3.3 wrapper for generating standardised jQuery DataTables (http://datatables.net/)
+Kohana 3.3 wrapper for generating standardised jQuery DataTables (http://datatables.net/).
+
+This module generates:
+ - your table's HTML
+ - a javascript file that initialises your table
+ - handles the dataTable request to load/filter/sort your table.
+
+The table's HTML and javascript get cached after being generated (its lifetime can be set in the config file).
 
 Install
 =========
@@ -60,6 +67,7 @@ A controller was added to show how you could implement this module's functionali
 
 ```php
 protected function _setup_table($table) {
+	$table->name('users');
     $table->add_column('username', array('head' => 'Username'));
     $table->add_column('email', array('head' => 'E-mail'));
     $table->add_column('logins', array('head' => '# logins', 'class' => 'span1'));
