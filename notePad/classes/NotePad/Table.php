@@ -308,14 +308,12 @@ class NotePad_Table
     }
 
 	/**
-	 * Add a column to the table
+	 * Retrieve a column definition, or retrieve/set and columns option
 	 *
 	 * @param string $name A column alias
 	 * @param array $options Specific column options
-	 * @param boolean $sortable Whether the column should be sortable
-	 * @param boolean $searchable Whether the column is searchable
-	 * @param string $location Where to insert the column (end|start|before|after)
-	 * @param string $relative Column to insert this one $location(before|after)
+	 * @param mixed $value If set over-write the option's value
+	 * @return mixed
 	 */
     public function column( $name, $option = null, $value = null )
     {
@@ -342,11 +340,15 @@ class NotePad_Table
 		return $this;
 	}
 	
+	/**
+	 * Retrieve and parse a format
+	 */
 	protected function _get_format($format, $param) {
 		$format = call_user_func($format, $param);
 		
 		return 'function(data, type, full) { '.$format.'}';
 	}
+	
 	/**
 	 * Builds a dataTable setup config json object
 	 * 
