@@ -24,6 +24,12 @@ class NotePad_Table
     * @var string
     */
     protected $_pk = '';
+    
+    /**
+	* Add buttons to the end of the table?
+	* @var boolean
+     */
+    protected $_buttons = false;
 
     /**
     * Index of the columns
@@ -102,6 +108,15 @@ class NotePad_Table
      */
     public function name($name) {
     	$this->_name = $name;
+    	
+    	return $this;
+    }
+    
+    /**
+	* whether or not to add buttons at the end of the dataTable
+     */
+    public function show_buttons($state) {
+    	$this->_buttons = $state;
     	
     	return $this;
     }
@@ -466,7 +481,7 @@ class NotePad_Table
 	 * Add table options at the end if they haven't been already
 	 */
 	protected function _options() {
-		if(!in_array('table_options', $this->_columns))
+		if(!in_array('table_options', $this->_columns) && $this->_buttons == true)
 		{
 			$class = (count($this->_row_buttons) > 4) ? 'span3' : 'span2';
 			
