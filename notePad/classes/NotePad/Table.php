@@ -370,7 +370,7 @@ class NotePad_Table
 	 * @param string $url Base url to send a standardised request to retrieve data records from
 	 */
 	public function js($url) {
-		$cache = Cache::instance();
+		$cache = Cache::instance(Kohana::$config->load('notepad-table.cache_group'));
 		
 		if (!$view = $cache->get('happyDemon.table.'.$this->_name.'.json', FALSE))
 		{
@@ -449,7 +449,7 @@ class NotePad_Table
 	 * @return string HTML table parsed template
 	 */
 	public function template() {
-		$cache = Cache::instance();
+		$cache = Cache::instance(Kohana::$config->load('notepad-table.cache_group'));
 		
 		if (!$view = $cache->get('happyDemon.table.'.$this->_name.'.tpl', FALSE))
 		{
