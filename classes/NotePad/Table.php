@@ -176,20 +176,20 @@ class NotePad_Table
         );
         
         // value at the top of the table presenting this column
-        $definition['head'] = ( isset( $options['head'] ) ) ? $options['head'] : ucfirst( $name );
+        $definition['head'] = Arr::get($options, 'head', ucfirst( $name ));
         // Column's head class (can be used for spacing the columns)
-        $definition['class'] = ( isset( $options['class'] ) ) ? $options['class'] : 'span2';
+        $definition['class'] = Arr::get($options, 'class', 'span2');
         $this->_span_width += (integer) substr(str_replace('span', '', $definition['class']), 0, 2);
         // is the html shown on-screen?
-        $definition['visible'] = ( isset( $options['visible'] ) ) ? $options['visible'] : true;
+        $definition['visible'] = Arr::get($options, 'visible', true);
         // default content if the column has no value
-        $definition['default'] = ( isset( $options['default'] ) ) ? $options['default'] : null;
+        $definition['default'] = Arr::get($options, 'default');
         // exact width the column should be (20px, 12em, ..)
-        $definition['width'] = ( isset( $options['width'] ) ) ? $options['width'] : null;
+        $definition['width'] = Arr::get($options, 'width');
         // How to start sorting the column
         $definition['sort'] = ( isset( $options['sort'] ) ) ? $options['sort'] : ( $definition['sortable'] ) ? array( 'asc', 'desc' ) : array();
         
-        $definition['param'] = (isset($options['param'])) ? $options['param'] : null;
+        $definition['param'] = Arr::get($options, 'param');
         
         // specify how the column's values should be parsed by mRender
         if ( isset( $options['format'] ) )

@@ -67,10 +67,13 @@ A controller was added to show how you could implement this module's functionali
 
 ```php
 protected function _setup_table($table) {
+	$this->_model = ORM::factory('User');
+    
 	$table->name('users');
     $table->add_column('username', array('head' => 'Username'));
     $table->add_column('email', array('head' => 'E-mail'));
     $table->add_column('logins', array('head' => '# logins', 'class' => 'span1'));
+    
     return $table;
 }
 ```
