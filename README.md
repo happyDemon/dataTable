@@ -56,7 +56,7 @@ Add "happydemon/datatable" to your dependencies
 {
   "require": {
 		"composer/installers": "*",
-		"happydemon/datatable": "0.2"
+		"happydemon/datatable": "0.3"
 	}
 }
 ```
