@@ -4,6 +4,15 @@ notePad grids a simple helper that manages the setup of your [dataTables](http:/
 
 grids will generate your table's HTML, the javascript required to initialise the table and handle the ajax request to fill, order and paginate the table.
 
+##Getting started
+An example implementation has been provided as a controller which has 3 actions;
+
+- The table action that renders the table's HTML (the example does not directly include the JS file)
+- The js action that renders the javascript needed to setup and initialise the dataTable 
+- The fill_table action that handles ajax requests which fills and sorts data for the dataTable.
+
+All that's left to do is for you to extend the *NotePad_Table* controller, set up your first table in the *_setup_table* method that's abstract and change this module's init.php to handle the routing.
+
 ##Caching
 
 Since grids is a generator, you'll probably want to cache its results so it doesn't run every time a request is sent.
