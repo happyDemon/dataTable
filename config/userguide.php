@@ -5,10 +5,10 @@ return array (
 		'enabled' => TRUE,
 						
 		// The name that should show up on the userguide index page
-		'name' => 'notePad table',
+		'name' => 'notePad.grds',
 			
 		// A short description of this module, shown on the index page
-		'description' => 'Documentation for Modular Gaming, gaming framework.',
+		'description' => 'A jQuery dataTable generator',
 						
 		// Copyright message, shown in the footer for this module
 		'copyright' => '&copy; 2012–2013 happyDemon',

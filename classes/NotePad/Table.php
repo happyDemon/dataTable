@@ -231,7 +231,7 @@ class NotePad_Table
 
         $definition['format'] = $format;
         
-        // specifiy how to retrieve the model's value for this column
+        // specify how to retrieve the model's value for this column
         if ( isset( $options['retrieve'] ) )
         {
             // a function has been defined, store it to call later ($model is the only parameter)

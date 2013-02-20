@@ -46,7 +46,7 @@ class NotePad_Table_Formats {
 	public static function checkbox($param=null) {
 		if($param == null)
 		{
-			return "return '<input type=\"checkbox\" data-id=\"'+data+'\" name=\"record_id['+data+']\" class=\"record-select\" />";
+			return "return '<input type=\"checkbox\" data-id=\"'+data+'\" name=\"record_id['+data+']\" class=\"record-select\" />';";
 		}
 		
 		return self::_view('checkbox', $param);

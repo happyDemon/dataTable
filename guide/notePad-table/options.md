@@ -34,6 +34,9 @@ $dataTable->name('some-new-table-name');
 ##Row selection
 
 If you want to support row selection you could turn on the ' *checkbox* ' config option, this will make the first column of every row have a checkbox, making it easy for you to handle multi-row selections.
+```php
+$dataTable->cfg('checkbox', true);
+```
 
 These checkbox elements get an array as name: record_id[ *id* ] if you'd rather submit them as a form, they also get a data-id property that's easier to read out in javascript.
 ```javascript
