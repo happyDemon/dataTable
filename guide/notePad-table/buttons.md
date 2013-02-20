@@ -11,7 +11,7 @@ The way we capture these click events are possible starting jQuery 1.7
 ```js
 $(document).ready(function(){
 	//capturing the edit button's click
-	$("table#users tbody").on("click", ".btn-action-edit", function(e){
+	$("table#notePad-dataTable tbody").on("click", ".btn-action-edit", function(e){
 		e.preventDefault();
 		
 		var rowId = $(this).data("id");

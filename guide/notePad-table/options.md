@@ -19,13 +19,25 @@ All these settings can be modified with the cfg method that the table class offe
 $dataTable->cfg('display_length', 25);
 ```
 
+##Defining a table's name
+By default every table get *notePad-dataTable* as its name. Make sure you change this every time you create a new table.
+
+The name is used as an identifier for:
+- caching 
+- the HTML table (uses Kohana's Inflector's underscore, this would mean the id of the table would become notePad_dataTable)
+
+You can easily change it by calling
+```php
+$dataTable->name('some-new-table-name');
+```
+
 ##Row selection
 
-If you want to support row selection you could turn on the '*checkbox*' config option, this will make the first column of every row have a checkbox, making it easy for you to handle multi-row selections.
+If you want to support row selection you could turn on the ' *checkbox* ' config option, this will make the first column of every row have a checkbox, making it easy for you to handle multi-row selections.
 
-These checkbox elements get an array as name: record_id[*id*] if you'd rather submit them as a form, they also get a data-id property that's easier to read out in javascript.
+These checkbox elements get an array as name: record_id[ *id* ] if you'd rather submit them as a form, they also get a data-id property that's easier to read out in javascript.
 ```javascript
-var selected_rows = $('table#users tbody').find('input.record-select:checked');
+var selected_rows = $('table#notePad-dataTable tbody').find('input.record-select:checked');
 
 //get the specific id's
 $.each(selected_rows, function(){
