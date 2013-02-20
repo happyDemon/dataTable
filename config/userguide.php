@@ -1,7 +1,7 @@
 <?php defined('SYSPATH') OR die('No direct access allowed.');
 
 return array (
-	'notePad-table' => array(
+	'notePad-grds' => array(
 		'enabled' => TRUE,
 						
 		// The name that should show up on the userguide index page

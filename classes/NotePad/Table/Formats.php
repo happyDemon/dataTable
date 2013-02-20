@@ -3,8 +3,9 @@
 /**
  * Javascript defined functions for rendering dataTable columns.
  * 
- * @author happydemon
- * @package happyDemon/notePad
+ * @author 		happydemon
+ * @package 	happyDemon/notePad
+ * @category	grds
  */
 class NotePad_Table_Formats {
 	

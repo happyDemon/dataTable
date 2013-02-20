@@ -1,7 +1,7 @@
 dataTable
 =========
 
-Kohana 3.3 wrapper for generating standardised jQuery DataTables (http://datatables.net/) that's prepared to be integrated with twitter bootstrap layouts.
+Kohana 3.3 wrapper for generating standardised jQuery [DataTables](http://datatables.net/) that's prepared to be integrated with twitter bootstrap layouts.
 
 This module generates:
  - your table's HTML

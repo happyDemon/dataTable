@@ -11,8 +11,20 @@ An example implementation has been provided as a controller which has 3 actions;
 - The js action that renders the javascript needed to setup and initialise the dataTable 
 - The fill_table action that handles ajax requests which fills and sorts data for the dataTable.
 
-All that's left to do is for you to extend the *NotePad_Table* controller, set up your first table in the *_setup_table* method that's abstract and change this module's init.php to handle the routing.
+All that's left to do is for you to extend the *NotePad_Table* controller, set up your first table in the *_setup_table* method that's abstract, initialise and register an ORM model and change this module's init.php to handle the routing.
 
+```php
+protected function _setup_table($table) {
+    $this->_model = ORM::factory('User');
+
+    $table->name('users');
+    $table->add_column('username', array('head' => 'Username'));
+    $table->add_column('email', array('head' => 'E-mail'));
+    $table->add_column('logins', array('head' => '# logins', 'class' => 'span1'));
+
+    return $table;
+}
+```
 ##Caching
 
 Since grids is a generator, you'll probably want to cache its results so it doesn't run every time a request is sent.

@@ -5,8 +5,9 @@ defined( 'SYSPATH' ) or die( 'No direct script access.' );
 *
 * easily create a table manually or based on a model.
 *
-* @author happydemon
-* @package happyDemon/notePad
+* @author 	happydemon
+* @package 	happyDemon/notePad
+* @category	grds
 */
 class NotePad_Table
 {
@@ -384,7 +385,7 @@ class NotePad_Table
 	 * @param string $url Base url to send a standardised request to retrieve data records from
 	 */
 	public function js($url) {
-		$cache = Cache::instance(Kohana::$config->load('notepad-table.cache_group'));
+		$cache = Cache::instance(Kohana::$config->load('notePad-grds.cache_group'));
 		
 		if (!$view = $cache->get('happyDemon.table.'.$this->_name.'.json', FALSE))
 		{
@@ -424,7 +425,7 @@ class NotePad_Table
 			}
 			$view = View::factory('notePad/dataTable', array('setup' => $setup, 'id' => Inflector::underscore($this->_name), 'var_name' => $this->_name));
 		
-			$cache->set('happyDemon.table.'.$this->_name.'.json', $view, Kohana::$config->load('notepad-table.cache_lifetime'));
+			$cache->set('happyDemon.table.'.$this->_name.'.json', $view, Kohana::$config->load('notePad-grds.cache_lifetime'));
 		}
 		
 		return $view;
@@ -463,7 +464,7 @@ class NotePad_Table
 	 * @return string HTML table parsed template
 	 */
 	public function template() {
-		$cache = Cache::instance(Kohana::$config->load('notepad-table.cache_group'));
+		$cache = Cache::instance(Kohana::$config->load('notePad-grds.cache_group'));
 		
 		if (!$view = $cache->get('happyDemon.table.'.$this->_name.'.tpl', FALSE))
 		{
@@ -485,7 +486,7 @@ class NotePad_Table
 				'class' => $this->_config['class_table']
 			));
 			
-			$cache->set('happyDemon.table.'.$this->_name.'.tpl', $view, Kohana::$config->load('notepad-table.cache_lifetime'));
+			$cache->set('happyDemon.table.'.$this->_name.'.tpl', $view, Kohana::$config->load('notePad-grds.cache_lifetime'));
 		}
 		
 		return $view;
