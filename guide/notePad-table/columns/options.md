@@ -49,6 +49,17 @@ $dataTable->add_column('available', $options);
 ```
 if the available column's value is 1 we'll show the icon called 'icon-eye-open', otherwise we'll show 'icon-lock'.
 
+###Checkbox
+
+```php
+$options = array(
+	'format' => 'checkbox',
+	'param' => 'element-name'
+);
+$dataTable->add_column('selectable', $options);
+```
+This column's value will be rendered as a checkbox, the checkbox's name will be 'element-name' and the value will be the same as the column's value.
+
 ###Providing your own mRender callbacks
 You'll probably want to be able to provide your own callbacks, that's easy to do, although it's a little bit like 'Inception': you have to provide a PHP callback that describes your mRender callback.
 

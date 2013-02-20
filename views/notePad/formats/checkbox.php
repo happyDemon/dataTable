@@ -1,1 +1,1 @@
-return '<input type="checkbox" name="<?=$param;?>['+data+']" class="record-<?=$param;?>" />';
+return '<input type="checkbox" name="<?=$param;?>[]" value="'+data+'" class="record-<?=$param;?>" />';
