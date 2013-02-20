@@ -15,9 +15,9 @@ class_table		| Table specific classes (defaults to 'table table-hover table-stri
 sDom			| How the dataTable will be rendered (see [dataTables](http://datatables.net/usage/options#sDom))
 
 All these settings can be modified with the cfg method that the table class offers, it's a simple setter:
-```php
-$dataTable->cfg('display_length', 25);
-```
+
+	$dataTable->cfg('display_length', 25);
+
 
 ##Defining a table's name
 By default every table get *notePad-dataTable* as its name. Make sure you change this every time you create a new table.
@@ -27,23 +27,21 @@ The name is used as an identifier for:
 - the HTML table (uses Kohana's Inflector's underscore, this would mean the id of the table would become notePad_dataTable)
 
 You can easily change it by calling
-```php
-$dataTable->name('some-new-table-name');
-```
+
+	$dataTable->name('some-new-table-name');
+
 
 ##Row selection
 
 If you want to support row selection you could turn on the ' *checkbox* ' config option, this will make the first column of every row have a checkbox, making it easy for you to handle multi-row selections.
-```php
-$dataTable->cfg('checkbox', true);
-```
+
+	$dataTable->cfg('checkbox', true);
 
 These checkbox elements get an array as name: record_id[ *id* ] if you'd rather submit them as a form, they also get a data-id property that's easier to read out in javascript.
-```javascript
-var selected_rows = $('table#notePad-dataTable tbody').find('input.record-select:checked');
 
-//get the specific id's
-$.each(selected_rows, function(){
-	var row_id = $(this).data('id');
-});
-```
+	var selected_rows = $('table#notePad-dataTable tbody').find('input.record-select:checked');
+	
+	//get the specific id's
+	$.each(selected_rows, function(){
+		var row_id = $(this).data('id');
+	});

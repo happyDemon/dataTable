@@ -21,43 +21,39 @@ grids ships with a few default format callbacks which are defined in *NotePad_Ta
 
 ###Image
 This parses provided URLs into images:
-```php
-$options = array(
-	'format' => 'image',
-);
-$dataTable->add_column('image', $options);
-```
+
+	$options = array(
+		'format' => 'image',
+	);
+	$dataTable->add_column('image', $options);
 
 optionally you can also define the images' dimensions :
 
-```php
-$options = array(
-	'format' => 'image',
-	'param' => array(50, 50)
-);
-$dataTable->add_column('available', $options);
-```
+	$options = array(
+		'format' => 'image',
+		'param' => array(50, 50)
+	);
+	$dataTable->add_column('available', $options);
 
 ###Icons
 These are useful for boolean fields, instead of just showing 1 or 0 you can define in the option's param which icons represent which.
-```php
-$options = array(
-	'format' => 'icon',
-	'param' => array('eye-open', 'lock')
-);
-$dataTable->add_column('available', $options);
-```
+
+	$options = array(
+		'format' => 'icon',
+		'param' => array('eye-open', 'lock')
+	);
+	$dataTable->add_column('available', $options);
+
 if the available column's value is 1 we'll show the icon called 'icon-eye-open', otherwise we'll show 'icon-lock'.
 
 ###Checkbox
 
-```php
-$options = array(
-	'format' => 'checkbox',
-	'param' => 'element-name'
-);
-$dataTable->add_column('selectable', $options);
-```
+	$options = array(
+		'format' => 'checkbox',
+		'param' => 'element-name'
+	);
+	$dataTable->add_column('selectable', $options);
+
 This column's value will be rendered as a checkbox, the checkbox's name will be 'element-name' and the value will be the same as the column's value.
 
 ###Providing your own mRender callbacks
@@ -65,43 +61,36 @@ You'll probably want to be able to provide your own callbacks, that's easy to do
 
 This callback always requires 1 parameter to be defined (it's passed the option's param key) and needs to return the javascript that [mRender](http://datatables.net/usage/columns#mRender) will use for formatting your column cell. 
 
-```php
-$options = array(
-	'format' => function ($param=null) {
-		return "return '<input type=\"checkbox\" name=\"someField[]\" value=\"'+data+'\" />';";
-	}
-);
-$dataTable->add_column('someField', $options);
-```
+	$options = array(
+		'format' => function ($param=null) {
+			return "return '<input type=\"checkbox\" name=\"someField[]\" value=\"'+data+'\" />';";
+		}
+	);
+	$dataTable->add_column('someField', $options);
 
 The format function is called by [call_user_func](http://php.net/manual/en/function.call-user-func.php) 
-and get's wrapped in mRender's standard
-```javascript
-function(data, type, full) { '.$format.' }
-```
+and get's wrapped in mRender's standard javascript:
+	function(data, type, full) { '.$format.' }
+
 
 ##Retrieve callbacks
 By default we'll just try to get a column's value by calling the ORM's get method, but if you want to specify your way of getting a column's value you can do so by specifying a callback:
 
-```php
-$options = array(
-	'retrieve' => function($record) { return $record->id; }
-);
-$dataTable->add_column('id', $options);
-```
+	$options = array(
+		'retrieve' => function($record) { return $record->id; }
+	);
+	$dataTable->add_column('id', $options);
 
 If you'd rather get the property of a relation of the loaded record you could do so like this:
 
-```php
-$options = array(
-	'retrieve' => 'avatar.url()'
-);
-$dataTable->add_column('avatar', $options);
-```
+	$options = array(
+		'retrieve' => 'avatar.url()'
+	);
+	$dataTable->add_column('avatar', $options);
+
 Every time a request is made to fill the dataTable we'll add a column named avatar that will be filled by calling the URL method of an avatar relation.
 In short, it will be mapped like this: 
-```php
-$record->avatar->url();
-```
+
+	$record->avatar->url();
 
 This does not work for a has_many or has_many through relation, than you're better of providing a custom callback.
