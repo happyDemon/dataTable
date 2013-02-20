@@ -86,7 +86,7 @@ class NotePad_Table
         'class_render' => 'offset3 span6', //set the table's dimensions
         'class_table' => 'table table-hover table-striped',
         'sDom' => null,
-    	'checbox' => false //Whether the first table column should be a checkbox
+    	'checkbox' => false //Whether the first table column should be a checkbox
  	);
 
     /**
@@ -134,6 +134,8 @@ class NotePad_Table
 	* Add a button to the row options 
 	* 
 	* @param string $name The button identifier
+	* @param string $icon A css icon (without the icon- prefix)
+	* @param string $class The button's css class
 	* @param string $location Where to insert the column (end|start|before|after)
     * @param string $relative Column to insert this one $location(before|after)
      */
@@ -148,12 +150,24 @@ class NotePad_Table
     /**
 	* Move a button to a different position
 	* 
-	* @param string $name The neame of the button you wish to move
+	* @param string $name The name of the button you wish to move
 	* @param string $location Where to insert the column (end|start|before|after)
     * @param string $relative Column to insert this one $location(before|after)
 	 */
     public function move_button($name, $location='end', $relative=null) {
     	$this->_place_key($this->_row_buttons, $name, null, $location, $relative);
+    	
+    	return $this;
+    }
+    
+    /**
+	* Remove a predefined buttons
+	* 
+	* @param string $name The name of the button you want to remove.
+     */
+    public function remove_button($name) {
+    	if(array_key_exists($name, $this->_row_buttons))
+    		unset($this->_row_buttons[$name]);
     	
     	return $this;
     }
