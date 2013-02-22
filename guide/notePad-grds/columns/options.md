@@ -70,6 +70,7 @@ This callback always requires 1 parameter to be defined (it's passed the option'
 
 The format function is called by [call_user_func](http://php.net/manual/en/function.call-user-func.php) 
 and get's wrapped in mRender's standard javascript:
+
 	function(data, type, full) { '.$format.' }
 
 
