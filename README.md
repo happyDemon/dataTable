@@ -55,6 +55,7 @@ Add "happydemon/datatable" to your dependencies
 ```javascript
 {
   "require": {
+  		"php":">=5.4",
 		"composer/installers": "*",
 		"happydemon/datatable": "0.3"
 	}
