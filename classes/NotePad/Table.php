@@ -51,6 +51,12 @@ class NotePad_Table
     * @var array
     */
     protected $_column_definitions = array();
+
+	/**
+	 * Columns which can be searched through dataTables
+	 * @var array
+	 */
+	protected $_search_columns = array();
     
     /**
      * Table name
@@ -85,7 +91,7 @@ class NotePad_Table
         'state_duration' => 7200, // How long the state will be saved (2 hours default) - iCookieDuration
         'pagination' => 'bootstrap', // Pagination plugin to use - sPaginationType (bootstrap|fullnumbers|twobutton)
         'class_render' => 'offset3 span6', //set the table's dimensions
-        'class_table' => 'table table-hover table-striped',
+        'class_table' => 'table table-hover table-striped table-bordered',
         'sDom' => null,
     	'checkbox' => false //Whether the first table column should be a checkbox
  	);
@@ -103,14 +109,15 @@ class NotePad_Table
     }
     
     /**
-	* Set the table's name
+	* Get or set the table's name
 	* 
 	* @param string $name
      */
-    public function name($name) {
-    	$this->_name = $name;
+    public function name($name=null) {
+	    if($name != null)
+    	    $this->_name = $name;
     	
-    	return $this;
+    	return $this->_name;
     }
     
     /**
@@ -189,12 +196,17 @@ class NotePad_Table
             'sortable' => $sortable,
             'searchable' => $searchable
         );
-        
+
+	    if($searchable == true)
+	    {
+		    $this->_search_columns[] = $name;
+	    }
+
         // value at the top of the table presenting this column
         $definition['head'] = Arr::get($options, 'head', ucfirst( $name ));
         // Column's head class (can be used for spacing the columns)
-        $definition['class'] = Arr::get($options, 'class', 'span2');
-        $this->_span_width += (integer) substr(str_replace('span', '', $definition['class']), 0, 2);
+        $definition['class'] = Arr::get($options, 'class', 'col-lg-2');
+        $this->_span_width += (integer) substr(str_replace('col-lg-', '', $definition['class']), 0, 2);
         // is the html shown on-screen?
         $definition['visible'] = Arr::get($options, 'visible', true);
         // default content if the column has no value
@@ -400,21 +412,20 @@ class NotePad_Table
 					'bSearchable' => $this->_column_definitions[$name]['searchable'],
 					'sDefaultContent' => $this->_column_definitions[$name]['default'],
 					'sWidth' => $this->_column_definitions[$name]['width'],
-					'mrender' => ($this->_column_definitions[$name]['format'] == null) ? null : '%function-'.$name.'%',
+					'mRender' => ($this->_column_definitions[$name]['format'] == null) ? null : '%function-'.$name.'%',
 				);
 			}
 			
 			$setup = json_encode(array(
 				'bProcessing' => true,
 				'bServerSide' => true,
-				'sAjaxSource' => $url.'records',
+				'sAjaxSource' => $url,
 				'iDisplayLength' => $this->_config['display_length'],
 				'iDisplayStart' => ($this->_config['display_start'] - 1) * $this->_config['display_length'],
 				'bStateSave' => $this->_config['state_save'],
 				'iCookieDuration' => $this->_config['state_duration'],
 				'sPaginationType' => $this->_config['pagination'],
 				'aoColumns' => $columns,
-				'sDom' => ($this->_config['sDom'] != null) ? $this->_config['sDom'] : "<'row-fluid'<'span4 offset1'l><'span4 pull-right'f>r><'row-fluid'<'".$this->_config['class_render']."'t>><'row-fluid'<'span6'i><'span6'p>>",
 			), JSON_NUMERIC_CHECK | JSON_PRETTY_PRINT |JSON_UNESCAPED_SLASHES);
 			
 			foreach($this->_columns as $name) {
@@ -438,7 +449,10 @@ class NotePad_Table
 	 */
 	public function request() {
 		$this->_options();
-		$paginate = Paginate::factory($this->_model);
+
+		$paginate = Paginate::factory($this->_model)
+		->columns($this->_columns)
+		->search_columns($this->_search_columns);
 		
 		$datatables = DataTables::factory($paginate)->execute();
 		
@@ -451,7 +465,6 @@ class NotePad_Table
 			foreach($this->_columns as $name) {
 				$row[] = call_user_func($this->_column_definitions[$name]['retrieve'], $record);
 			}
-			
 			$datatables->add_row($row);
 		}
 		
@@ -498,14 +511,14 @@ class NotePad_Table
 	protected function _options() {
 		if(!in_array('table_options', $this->_columns) && $this->_buttons == true)
 		{
-			$class = (count($this->_row_buttons) > 4) ? 'span3' : 'span2';
+			$class = (count($this->_row_buttons) > 4) ? 'col-lg-3' : 'col-lg-2';
 			
 			$options = array('head' => 'Options', 'class' => $class, 'retrieve' => $this->_pk, 'format' => 'options', 'param' => $this->_row_buttons);
 			$this->add_column('table_options', $options, false, false, 'end');
 		}
 		
 		if($this->_config['checkbox'] == true && !in_array('select_record', $this->_columns)) {
-			$options = array('head' => '', 'class' => 'span1', 'retrieve' => $this->_pk, 'format' => 'checkbox');
+			$options = array('head' => '', 'class' => 'col-lg-1', 'retrieve' => $this->_pk, 'format' => 'checkbox');
 			$this->add_column('select_record', $options, false, false, 'start');
 		}
 	}

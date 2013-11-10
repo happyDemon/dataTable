@@ -65,10 +65,10 @@ class NotePad_Table_Formats {
 		foreach($param as $id => $def) {
 			$class = (isset($def['class'])) ? ' btn-'.$def['class'] : '';
 			
-			$return .= '<button data-id="\'+data+\'" class="btn'.$class.' btn-action-'.$id.'"><i class="icon-'.$def['icon'].'"></i></button> ';
+			$return .= ' <button data-id="\'+data+\'" class="btn'.$class.' btn-action-'.$id.'"><i class="icon-'.$def['icon'].'"></i></button>';
 		}
 		
-		return $return."';";
+		return $return."';\n";
 	}
 	
 	/**
@@ -78,6 +78,6 @@ class NotePad_Table_Formats {
 	 * @param array $param
 	 */
 	protected static function _view($file, $param) {
-		return View::factory('notePad/formats/'.file, array('param' => $param))->render();
+		return View::factory('notePad/formats/'.$file, array('param' => $param))->render();
 	}
 }
