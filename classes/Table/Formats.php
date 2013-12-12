@@ -6,6 +6,4 @@
  * @author happydemon
  * @package happyDemon/notePad
  */
-class Table_Formats extends NotePad_Table_Formats {
-	
-}
+class Table_Formats extends Kohana_Table_Formats {}

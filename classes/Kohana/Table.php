@@ -6,13 +6,10 @@ defined( 'SYSPATH' ) or die( 'No direct script access.' );
 * easily create a table manually or based on a model.
 *
 * @author 	happydemon
-* @package 	happyDemon/notePad
-* @category	grds
+* @package 	happyDemon/dataTable
 */
-class NotePad_Table
+class Kohana_Table
 {
-    use NotePad_Order;
-
     /**
     * Store the model we want to base this table on
     *
@@ -57,12 +54,18 @@ class NotePad_Table
 	 * @var array
 	 */
 	protected $_search_columns = array();
+
+	/**
+	 * Columns that are sortable (key is the row's name, value is the DB's column name)
+	 * @var array
+	 */
+	protected $_sort_columns = array();
     
     /**
      * Table name
      * @var string
      */
-    protected $_name = 'notePad-dataTable';
+    protected $_name = 'dataTable';
     
     /**
 	 * Buttons that are put at the end of every table row
@@ -70,11 +73,11 @@ class NotePad_Table
      */
     protected $_row_buttons = array(
     	'edit' => array(
-    		'icon' => 'edit',
+    		'icon' => 'glyphicon glyphicon-edit',
     		'class' => 'warning'
     	),
     	'remove' => array(
-    		'icon' => 'remove-sign',
+    		'icon' => 'glyphicon glyphicon-remove-sign',
     		'class' => 'danger'
     	)
     );
@@ -90,7 +93,7 @@ class NotePad_Table
         'state_save' => false, // Save the state of the table in a cookie - bStateSave
         'state_duration' => 7200, // How long the state will be saved (2 hours default) - iCookieDuration
         'pagination' => 'bootstrap', // Pagination plugin to use - sPaginationType (bootstrap|fullnumbers|twobutton)
-        'class_render' => 'offset3 span6', //set the table's dimensions
+        'class_render' => 'col-lg-offset-3 col-lg-6', //set the table's dimensions
         'class_table' => 'table table-hover table-striped table-bordered',
         'sDom' => null,
     	'checkbox' => false //Whether the first table column should be a checkbox
@@ -148,9 +151,16 @@ class NotePad_Table
     * @param string $relative Column to insert this one $location(before|after)
      */
     public function add_button($name, $icon, $class=null, $location='end', $relative=null) {
-    	$val = array('icon' => $icon, 'class' => $class);
-    	
-    	$this->_place_key($this->_row_buttons, $name, $val, $location, $relative);
+	    if(is_array($class))
+	    {
+		    $val = array_merge($class, array('icon' => $icon));
+	    }
+	    else
+	    {
+		    $val = array('icon' => $icon, 'class' => $class);
+	    }
+
+	    Arr::add($this->_row_buttons, $name, $val, $location, $relative);
     	
     	return $this;
     }
@@ -163,7 +173,7 @@ class NotePad_Table
     * @param string $relative Column to insert this one $location(before|after)
 	 */
     public function move_button($name, $location='end', $relative=null) {
-    	$this->_place_key($this->_row_buttons, $name, null, $location, $relative);
+	    Arr::move($this->_row_buttons, $name, $location, $relative);
     	
     	return $this;
     }
@@ -187,7 +197,7 @@ class NotePad_Table
     * @param array $options Specific column options
     * @param boolean $sortable Whether the column should be sortable
     * @param boolean $searchable Whether the column is searchable
-    * @throws NotePad_Table_Exception
+    * @throws Kohana_Table_Exception
     * @return array
     */
     protected function _define_column( $name, $options, $sortable, $searchable )
@@ -200,6 +210,11 @@ class NotePad_Table
 	    if($searchable == true)
 	    {
 		    $this->_search_columns[] = $name;
+	    }
+
+	    if($sortable == true)
+	    {
+		    $this->_sort_columns[$name] = Arr::get($options, 'field', $name);
 	    }
 
         // value at the top of the table presenting this column
@@ -227,13 +242,13 @@ class NotePad_Table
                 $format = $options['format'];
             }
             // otherwise check if it's shipped with our table formats
-            else if ( is_callable( array( 'NotePad_Table_Formats', $options['format'] ) ) )
+            else if ( is_callable( array( 'Table_Formats', $options['format'] ) ) )
             {
-                $format = array( 'NotePad_Table_Formats', $options['format'] );
+                $format = array( 'Table_Formats', $options['format'] );
             }
             else
             {
-                Throw new NotePad_Table_Exception( 'Column ":name": does not have a valid format (:type).', array(
+                Throw new Kohana_Table_Exception( 'Column ":name": does not have a valid format (:type).', array(
                         ':name' => $name, ':type' => (string) $options['format']
                         ) );
             }
@@ -299,7 +314,7 @@ class NotePad_Table
             }
             else
             {
-                Throw new NotePad_Table_Exception( 'Column ":name": has no valid way to retrieve a column\'s value (:given)', array(
+                Throw new Kohana_Table_Exception( 'Column ":name": has no valid way to retrieve a column\'s value (:given)', array(
                         ':name' => $name, ':given' => (string) $options['retrieve']
                         ) );
             }
@@ -330,7 +345,7 @@ class NotePad_Table
         // define the column
         $this->_column_definitions[$name] = $this->_define_column( $name, $options, $sortable, $searchable );
         // place the column
-        $this->_columns = $this->_place_value( $this->_columns, $name, $location, $relative );
+        $this->_columns = Arr::place_value($this->_columns, $name, $location, $relative );
 
         return $this;
     }
@@ -344,7 +359,7 @@ class NotePad_Table
     */
     public function move_column( $name, $position, $relative = null )
     {
-        $this->_place_value( $this->_columns, $name, $position, $relative );
+        Arr::place_value($this->_columns, $name, $position, $relative );
 
         return $this;
     }
@@ -454,7 +469,9 @@ class NotePad_Table
 		->columns($this->_columns)
 		->search_columns($this->_search_columns);
 		
-		$datatables = DataTables::factory($paginate)->execute();
+		$datatables = DataTables::factory($paginate)
+			->sort_columns($this->_sort_columns)
+			->execute();
 		
 		$result = $datatables->result();
 
@@ -519,7 +536,7 @@ class NotePad_Table
 		
 		if($this->_config['checkbox'] == true && !in_array('select_record', $this->_columns)) {
 			$options = array('head' => '', 'class' => 'col-lg-1', 'retrieve' => $this->_pk, 'format' => 'checkbox');
-			$this->add_column('select_record', $options, false, false, 'start');
+			$this->add_column($this->_pk, $options, false, false, 'start');
 		}
 	}
 }

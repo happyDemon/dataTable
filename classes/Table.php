@@ -8,7 +8,4 @@ defined( 'SYSPATH' ) or die( 'No direct script access.' );
 * @author happydemon
 * @package happyDemon/notePad
 */
-class Table extends NotePad_Table
-{
-   
-}
+class Table extends Kohana_Table {}

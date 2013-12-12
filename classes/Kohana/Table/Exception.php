@@ -5,6 +5,6 @@
  * @package happyDemon/notePad
  * @category grds
  */
-class NotePad_Table_Exception extends Kohana_Exception {
+class Kohana_Table_Exception extends Kohana_Exception {
 	
 }

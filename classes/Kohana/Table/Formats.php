@@ -7,7 +7,7 @@
  * @package 	happyDemon/notePad
  * @category	grds
  */
-class NotePad_Table_Formats {
+class Kohana_Table_Formats {
 	
 	/**
 	 * parses column value into an image.
@@ -47,7 +47,7 @@ class NotePad_Table_Formats {
 	public static function checkbox($param=null) {
 		if($param == null)
 		{
-			return "return '<input type=\"checkbox\" data-id=\"'+data+'\" name=\"record_id['+data+']\" class=\"record-select\" />';";
+			return "return '<div class=\"text-center\"><input type=\"checkbox\" data-id=\"'+data+'\" name=\"record_id['+data+']\" class=\"record-select\" /></div>';";
 		}
 		
 		return self::_view('checkbox', $param);
@@ -65,7 +65,7 @@ class NotePad_Table_Formats {
 		foreach($param as $id => $def) {
 			$class = (isset($def['class'])) ? ' btn-'.$def['class'] : '';
 			
-			$return .= ' <button data-id="\'+data+\'" class="btn'.$class.' btn-action-'.$id.'"><i class="icon-'.$def['icon'].'"></i></button>';
+			$return .= ' <button data-id="\'+data+\'" class="btn'.$class.' btn-xs btn-action-'.$id.'"><i class="icon-'.$def['icon'].'"></i></button>';
 		}
 		
 		return $return."';\n";
