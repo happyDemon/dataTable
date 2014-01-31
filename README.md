@@ -78,3 +78,7 @@ protected function _setup_table($table) {
     return $table;
 }
 ```
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/happyDemon/datatable/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
